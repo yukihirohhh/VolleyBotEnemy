@@ -21,6 +21,7 @@ TagManager:
   - Avoid
   - RailRight
   - RailLeft
+  - Ball
   layers:
   - Default
   - TransparentFX
