@@ -11,6 +11,10 @@ public class PatrolAI : MonoBehaviour
     [Tooltip("動くスピード")] public float speed;
     [Tooltip("Rayの飛ばす距離")] public float distance;
     [Tooltip("Ray飛ばすやつのもとobj")] public Transform groundDetection;
+    [Tooltip("Ball検出用トランスフォーム")] public Transform ballDetection;
+    [Tooltip("吹き飛ばす力")] public float thrust = 10f;
+    [Tooltip("右方向に吹き飛ばす力")] public Vector2 forceDirectionRight = new Vector2(0.3f, 1f);
+    [Tooltip("左方向に吹き飛ばす力")] public Vector2 forceDirectionLeft = new Vector2(-0.3f, 1f);
 
     [Space(20)]
 
@@ -33,14 +37,14 @@ public class PatrolAI : MonoBehaviour
 
     private void Update()
     {
-        if (!isAnimation2Playing) // ANIMATION_2が再生中でない場合のみ動作とANIMATION_1を更新
+        if (!isAnimation2Playing)
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
 
             RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-            Debug.DrawRay(groundDetection.position, Vector2.down * distance, Color.red); // Debug ray to visualize
+            Debug.DrawRay(groundDetection.position, Vector2.down * distance, Color.red);
 
-            if (groundInfo.collider == null) // No ground detected, indicating a cliff
+            if (groundInfo.collider == null)
             {
                 FlipDirection();
             }
@@ -77,6 +81,19 @@ public class PatrolAI : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ball"))
+        {
+            Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 forceDirection = movingRight ? forceDirectionRight : forceDirectionLeft;
+                rb.AddForce(forceDirection.normalized * thrust, ForceMode2D.Impulse);
+            }
+        }
+    }
+
     void ANIMATION_1()
     {
         if (Time.time - anime_time_1 > anim_1_sec)
@@ -100,8 +117,8 @@ public class PatrolAI : MonoBehaviour
             if (anime_2_count >= anim_2_array.Length)
             {
                 anime_2_count = 0;
-                isAnimation2Playing = false; // ANIMATION_2終了
-                Destroy(gameObject); // Destroy object after animation ends
+                isAnimation2Playing = false;
+                Destroy(gameObject);
             }
 
             sr.sprite = anim_2_array[anime_2_count];
