@@ -38,18 +38,11 @@ public class PatrolAI : MonoBehaviour
             transform.Translate(Vector2.right * speed * Time.deltaTime);
 
             RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-            if (groundInfo.collider == false)
+            Debug.DrawRay(groundDetection.position, Vector2.down * distance, Color.red); // Debug ray to visualize
+
+            if (groundInfo.collider == null) // No ground detected, indicating a cliff
             {
-                if (movingRight == true)
-                {
-                    transform.eulerAngles = new Vector3(0, 180, 0);
-                    movingRight = false;
-                }
-                else
-                {
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    movingRight = true;
-                }
+                FlipDirection();
             }
 
             ANIMATION_1();
@@ -60,11 +53,25 @@ public class PatrolAI : MonoBehaviour
         }
     }
 
+    private void FlipDirection()
+    {
+        if (movingRight)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            movingRight = false;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            movingRight = true;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            isAnimation2Playing = true; 
+            isAnimation2Playing = true;
             anime_time_2 = Time.time;
             anime_2_count = 0;
         }
@@ -83,7 +90,6 @@ public class PatrolAI : MonoBehaviour
         }
     }
 
-
     void ANIMATION_2()
     {
         if (Time.time - anime_time_2 > anim_2_sec)
@@ -94,8 +100,8 @@ public class PatrolAI : MonoBehaviour
             if (anime_2_count >= anim_2_array.Length)
             {
                 anime_2_count = 0;
-                isAnimation2Playing = false; // ANIMATION_2Ç™èIóπÇµÇΩÇ±Ç∆Çé¶Ç∑
-                Destroy(gameObject);
+                isAnimation2Playing = false; // ANIMATION_2èIóπ
+                Destroy(gameObject); // Destroy object after animation ends
             }
 
             sr.sprite = anim_2_array[anime_2_count];
