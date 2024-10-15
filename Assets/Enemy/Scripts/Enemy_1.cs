@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolAI : MonoBehaviour
+public class Enemy_1 : MonoBehaviour
 {
     private bool movingRight = true;
     private bool isAnimation2Playing = false;

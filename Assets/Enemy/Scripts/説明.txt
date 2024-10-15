@@ -1,12 +1,41 @@
-・敵正面はボールが当たったら跳ね返る
-・一定時間でその場で立ち止まる
-・groundDetectionオブジェクトからrayを下に飛ばしてその先に
-				地面がなければ反対方向を向く
-		rayのdistanceは1.0で大体tilemap１個分
-		rayの長さを延ばせば、高いところからは落りない
-		短くすればするほどどんな高さでも飛び降りる（はず）
 
-・balldetectionトランスフォームにballオブジェクトをアタッチ
-	ballにはタグをつける
+//////Enemy_1のスクリプトについて///////
+speed :動くスピード
 
-・スクリプト内にアニメーション用配列があるから好きな画像に差し替えられる
+Distance :地面を検出するrayの長さ。
+			rayの先っちょが判定してくれるから、長さの設定によっては２マスの高さは落ちない/落ちるとかの判定ができる
+
+Ground Detection :子オブジェクトにcreateEmptyで作ったオブジェクトをアタッチしてそのオブジェクトからrayが伸びてる。
+
+Ball Detection :Ballのobjectをアタッチするとそれを反射する。
+
+Thrust :ボールを吹き飛ばす力
+
+Force Direction Right :右にどのくらい飛ばすか（あんまり気にしなくていい）
+Force Direction Left :左にどのくらい飛ばすか（あんまり気にしなくていい）
+
+Min Animation Switch Interval :walk状態とstay状態をランダムに切り替えるときのインターバルの最小値
+Max Animation Switch Interval :↑の最大値
+
+アニメーション配列
+	anim_x_array  :spriteを何枚入れるかの配列。0から順番に配列をループしてくれる。
+	Anim_x_sec    :切り替える時間。だいたい0.1から0.2くらい。それ以上だと早すぎる。
+	Anime_x_count :アニメーションが切り替わってるのが見えるだけ。（まったく気にしなくていい）
+
+
+
+
+////Enemy_2のスクリプトについて///////
+Points :配列を増やしてpointを自分で設定する。スクリプトをアタッチしたオブジェクトを基準に
+				そのポイント間をランダムに移動し続ける。（プレイヤータグが付いたオブジェクトが近づくとそっちにすすむ
+				作るときgizmoが付いてるから見やすいはず
+
+speed :スピード動くスピード
+
+Chase Speed Multiplier :playerを追いかけるときのスピード
+
+アニメーション配列についてはEnemy_1と同じ
+
+Min Animation Switch xxxxx :これも同じ
+
+Detection Range :プレイヤータグが付いたオブジェクトがこの範囲に入るとそれを追いかける。（gizmoが付いてるから設定しやすいはず
