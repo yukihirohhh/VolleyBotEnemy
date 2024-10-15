@@ -8857,11 +8857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777ecefd08730f246aeced20044379cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points:
-  - {x: 2.48, y: 1.85}
-  - {x: -0.92, y: 1.16}
-  - {x: -2.65, y: -1.37}
-  - {x: 2.71, y: -0.45}
+  relativePoints: []
   speed: 0.7
   chaseSpeedMultiplier: 2
   anim_1_array:
@@ -8888,6 +8884,8 @@ MonoBehaviour:
   minAnimationSwitchInterval: 3
   maxAnimationSwitchInterval: 4
   detectionRange: 2
+  dropItems:
+  - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
 --- !u!4 &1044041822040766149
 Transform:
   m_ObjectHideFlags: 0
@@ -9358,6 +9356,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 82f9f654de2ecb742acfddec82cc5eaa, type: 3}
   anim_3_sec: 0.1
   anime_3_count: 0
+  dropItems:
+  - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

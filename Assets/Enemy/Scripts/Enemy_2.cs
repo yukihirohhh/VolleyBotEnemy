@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Vector2[] Points;
-    private Vector2[] points;
+    public Vector2[] relativePoints; // 相対的なポイントを格納する配列
+    private Vector2[] points; // ワールド座標のポイントを格納する配列
     private Rigidbody2D rb;
     private Vector2 currentPoint;
     public float speed;
-    public float chaseSpeedMultiplier = 2f;
+    public float chaseSpeedMultiplier = 2f; // 追いかけるときのスピード倍率
 
+    // Animation variables
     private SpriteRenderer sr;
     public Sprite[] anim_1_array;
     private float anime_time_1;
     public float anim_1_sec;
     private int anime_1_count;
 
+    // Death animation variables
     public Sprite[] anim_2_array;
     private float anime_time_2;
     public float anim_2_sec;
     private int anime_2_count;
     private bool isAnimation2Playing = false;
 
+    // Idle animation variables
     public Sprite[] anim_3_array;
     private float anime_time_3;
     public float anim_3_sec;
@@ -32,22 +35,28 @@ public class EnemyAI : MonoBehaviour
     public float minAnimationSwitchInterval = 3f;
     public float maxAnimationSwitchInterval = 6f;
 
+    // Player detection variables
     public float detectionRange = 5f;
     private Transform playerTransform;
     private bool isChasingPlayer = false;
+
+    // Drop item variables
+    public GameObject[] dropItems; // ドロップするアイテムの配列
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        // Initialize animation variables
         sr = GetComponent<SpriteRenderer>();
         anime_time_1 = Time.time;
         anime_1_count = 0;
 
-        points = new Vector2[Points.Length];
-        for (int i = 0; i < Points.Length; i++)
+        // Initialize points array based on relativePoints
+        points = new Vector2[relativePoints.Length];
+        for (int i = 0; i < relativePoints.Length; i++)
         {
-            points[i] = (Vector2)transform.position + Points[i];
+            points[i] = (Vector2)transform.position + relativePoints[i];
         }
 
         SetRandomAnimationSwitchTime();
@@ -80,7 +89,7 @@ public class EnemyAI : MonoBehaviour
             if (isAnimation3Playing)
             {
                 ANIMATION_3();
-                rb.velocity = Vector2.zero;
+                rb.velocity = Vector2.zero; // Stop movement
             }
             else
             {
@@ -108,6 +117,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = (currentPoint - (Vector2)transform.position).normalized;
         rb.velocity = direction * speed;
 
+        // Flip the sprite based on the direction
         if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
         {
             flip();
@@ -128,9 +138,9 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Points != null)
+        if (relativePoints != null)
         {
-            foreach (var relativePoint in Points)
+            foreach (var relativePoint in relativePoints)
             {
                 Vector2 worldPoint = (Vector2)transform.position + relativePoint;
                 Gizmos.DrawWireSphere(worldPoint, 0.5f);
@@ -170,8 +180,9 @@ public class EnemyAI : MonoBehaviour
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
-            rb.velocity = direction * speed * chaseSpeedMultiplier;
+            rb.velocity = direction * speed * chaseSpeedMultiplier; // 追いかけるときのスピードを2倍にする
 
+            // Flip the sprite based on the direction
             if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
             {
                 flip();
@@ -203,6 +214,7 @@ public class EnemyAI : MonoBehaviour
             {
                 anime_2_count = 0;
                 isAnimation2Playing = false;
+                DropItem(); // ドロップアイテムを生成
                 Destroy(gameObject);
             }
 
@@ -220,6 +232,15 @@ public class EnemyAI : MonoBehaviour
             if (anime_3_count >= anim_3_array.Length) { anime_3_count = 0; }
 
             sr.sprite = anim_3_array[anime_3_count];
+        }
+    }
+
+    private void DropItem()
+    {
+        if (dropItems != null && dropItems.Length > 0)
+        {
+            int randomIndex = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
         }
     }
 }

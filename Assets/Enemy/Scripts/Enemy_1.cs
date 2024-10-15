@@ -41,6 +41,9 @@ public class Enemy_1 : MonoBehaviour
 
     private float animationSwitchTime;
 
+    // Drop item variables
+    public GameObject[] dropItems; // ドロップするアイテムの配列
+
     void Start()
     {
         sr = this.GetComponent<SpriteRenderer>();
@@ -151,6 +154,7 @@ public class Enemy_1 : MonoBehaviour
             {
                 anime_2_count = 0;
                 isAnimation2Playing = false;
+                DropItem(); // ドロップアイテムを生成
                 Destroy(gameObject);
             }
 
@@ -168,6 +172,15 @@ public class Enemy_1 : MonoBehaviour
             if (anime_3_count >= anim_3_array.Length) { anime_3_count = 0; }
 
             sr.sprite = anim_3_array[anime_3_count];
+        }
+    }
+
+    private void DropItem()
+    {
+        if (dropItems != null && dropItems.Length > 0)
+        {
+            int randomIndex = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
         }
     }
 }
