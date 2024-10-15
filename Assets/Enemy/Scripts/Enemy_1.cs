@@ -44,9 +44,15 @@ public class Enemy_1 : MonoBehaviour
     // Drop item variables
     public GameObject[] dropItems; // ドロップするアイテムの配列
 
+    // Audio variables
+    public AudioClip deflectSound;
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         sr = this.GetComponent<SpriteRenderer>();
+        audioSource = this.GetComponent<AudioSource>();
         SetRandomAnimationSwitchTime();
     }
 
@@ -114,6 +120,7 @@ public class Enemy_1 : MonoBehaviour
             isAnimation2Playing = true;
             anime_time_2 = Time.time;
             anime_2_count = 0;
+            PlaySound(deathSound); // Play death sound
         }
     }
 
@@ -126,6 +133,7 @@ public class Enemy_1 : MonoBehaviour
             {
                 Vector2 forceDirection = movingRight ? forceDirectionRight : forceDirectionLeft;
                 rb.AddForce(forceDirection.normalized * thrust, ForceMode2D.Impulse);
+                PlaySound(deflectSound); // Play deflect sound
             }
         }
     }
@@ -181,6 +189,14 @@ public class Enemy_1 : MonoBehaviour
         {
             int randomIndex = Random.Range(0, dropItems.Length);
             Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }

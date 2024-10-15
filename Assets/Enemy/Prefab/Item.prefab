@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8643174718629389831}
   - component: {fileID: 581936148593433238}
   - component: {fileID: 7494759473754310033}
-  - component: {fileID: 6737581003138062709}
   - component: {fileID: 6659086276490291134}
+  - component: {fileID: -6300446042961721331}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -112,9 +112,23 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &6737581003138062709
+--- !u!114 &6659086276490291134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823615053695692731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8199686182a534fad72992af75935b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropForce: 3
+  dropSound: {fileID: 0}
+--- !u!60 &-6300446042961721331
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,16 +176,3 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &6659086276490291134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823615053695692731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f8199686182a534fad72992af75935b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropForce: 3

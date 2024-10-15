@@ -8724,7 +8724,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &2005443046
 SpriteRenderer:
@@ -8787,7 +8787,7 @@ Transform:
   m_GameObject: {fileID: 2005443043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.76, y: 2.34, z: -0.012411}
+  m_LocalPosition: {x: 4.76, y: 2.68, z: -0.012411}
   m_LocalScale: {x: 0.384774, y: 0.384774, z: 0.384774}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8837,7 +8837,7 @@ Transform:
   m_GameObject: {fileID: 3312035896385281995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.74, y: -0.24, z: 0}
+  m_LocalPosition: {x: 8.35, y: -0.19, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8857,7 +8857,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777ecefd08730f246aeced20044379cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativePoints: []
+  relativePoints:
+  - {x: -3, y: 1.5}
+  - {x: 3, y: 1.5}
+  - {x: -3, y: -1.5}
+  - {x: 3, y: -1.5}
   speed: 0.7
   chaseSpeedMultiplier: 2
   anim_1_array:
@@ -8886,6 +8890,7 @@ MonoBehaviour:
   detectionRange: 2
   dropItems:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
+  deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
 --- !u!4 &1044041822040766149
 Transform:
   m_ObjectHideFlags: 0
@@ -9125,7 +9130,7 @@ Transform:
   m_GameObject: {fileID: 7526041077450327626}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.97, y: 1.19, z: 0}
+  m_LocalPosition: {x: 4.48, y: 0.9, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9282,7 +9287,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 13
+  m_Mass: 25
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -9358,6 +9363,8 @@ MonoBehaviour:
   anime_3_count: 0
   dropItems:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
+  deflectSound: {fileID: 8300000, guid: 89eaf8b51beefc6489b3456dbae03d76, type: 3}
+  deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

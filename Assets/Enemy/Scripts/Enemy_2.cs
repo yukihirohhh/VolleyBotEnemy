@@ -43,6 +43,10 @@ public class EnemyAI : MonoBehaviour
     // Drop item variables
     public GameObject[] dropItems; // ドロップするアイテムの配列
 
+    // Audio variables
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,6 +63,7 @@ public class EnemyAI : MonoBehaviour
             points[i] = (Vector2)transform.position + relativePoints[i];
         }
 
+        audioSource = GetComponent<AudioSource>();
         SetRandomAnimationSwitchTime();
         SetRandomPoint();
     }
@@ -157,6 +162,7 @@ public class EnemyAI : MonoBehaviour
             isAnimation2Playing = true;
             anime_time_2 = Time.time;
             anime_2_count = 0;
+            PlaySound(deathSound); // Play death sound
         }
     }
 
@@ -241,6 +247,14 @@ public class EnemyAI : MonoBehaviour
         {
             int randomIndex = Random.Range(0, dropItems.Length);
             Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }
