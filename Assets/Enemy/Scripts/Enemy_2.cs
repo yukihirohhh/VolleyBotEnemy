@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Vector2[] relativePoints; // 相対的なポイントを格納する配列
-    private Vector2[] points; // ワールド座標のポイントを格納する配列
+    public Vector2[] relativePoints;
+    private Vector2[] points;
     private Rigidbody2D rb;
     private Vector2 currentPoint;
     public float speed;
-    public float chaseSpeedMultiplier = 2f; // 追いかけるときのスピード倍率
+    public float chaseSpeedMultiplier = 2f;
 
     // Animation variables
     private SpriteRenderer sr;
@@ -41,10 +41,11 @@ public class EnemyAI : MonoBehaviour
     private bool isChasingPlayer = false;
 
     // Drop item variables
-    public GameObject[] dropItems; // ドロップするアイテムの配列
+    public GameObject[] dropItems;
 
     // Audio variables
     public AudioClip deathSound;
+    public AudioClip loopSound; // 新規追加: ループサウンドのAudioClip
     private AudioSource audioSource;
 
     void Start()
@@ -64,6 +65,11 @@ public class EnemyAI : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // AudioSourceがなければ追加
+        }
+
         SetRandomAnimationSwitchTime();
         SetRandomPoint();
     }
@@ -94,7 +100,7 @@ public class EnemyAI : MonoBehaviour
             if (isAnimation3Playing)
             {
                 ANIMATION_3();
-                rb.velocity = Vector2.zero; // Stop movement
+                rb.velocity = Vector2.zero;
             }
             else
             {
@@ -186,7 +192,7 @@ public class EnemyAI : MonoBehaviour
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
-            rb.velocity = direction * speed * chaseSpeedMultiplier; // 追いかけるときのスピードを2倍にする
+            rb.velocity = direction * speed * chaseSpeedMultiplier;
 
             // Flip the sprite based on the direction
             if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
@@ -206,6 +212,9 @@ public class EnemyAI : MonoBehaviour
             if (anime_1_count >= anim_1_array.Length) { anime_1_count = 0; }
 
             sr.sprite = anim_1_array[anime_1_count];
+
+            // ループサウンドを再生
+            PlayLoopingSound();
         }
     }
 
@@ -220,11 +229,14 @@ public class EnemyAI : MonoBehaviour
             {
                 anime_2_count = 0;
                 isAnimation2Playing = false;
-                DropItem(); // ドロップアイテムを生成
+                DropItem();
                 Destroy(gameObject);
             }
 
             sr.sprite = anim_2_array[anime_2_count];
+
+            // ループサウンドを再生
+            PlayLoopingSound();
         }
     }
 
@@ -255,6 +267,24 @@ public class EnemyAI : MonoBehaviour
         if (audioSource != null && clip != null)
         {
             audioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayLoopingSound()
+    {
+        if (!audioSource.isPlaying && loopSound != null)
+        {
+            audioSource.loop = true;
+            audioSource.clip = loopSound;
+            audioSource.Play();
+        }
+    }
+
+    private void StopLoopingSound()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 }

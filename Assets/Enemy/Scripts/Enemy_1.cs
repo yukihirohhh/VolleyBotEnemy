@@ -6,7 +6,7 @@ public class Enemy_1 : MonoBehaviour
 {
     private bool movingRight = true;
     private bool isAnimation2Playing = false;
-    private bool isAnimation3Playing = false; // ANIMATION_3のフラグ
+    private bool isAnimation3Playing = false;
     SpriteRenderer sr;
 
     [Tooltip("動くスピード")] public float speed;
@@ -42,17 +42,26 @@ public class Enemy_1 : MonoBehaviour
     private float animationSwitchTime;
 
     // Drop item variables
-    public GameObject[] dropItems; // ドロップするアイテムの配列
+    public GameObject[] dropItems;
 
     // Audio variables
     public AudioClip deflectSound;
     public AudioClip deathSound;
+    public AudioClip dropSound;  // 新規追加: アイテムドロップ時のサウンド
+    public AudioClip animationLoopSound;
     private AudioSource audioSource;
 
     void Start()
     {
         sr = this.GetComponent<SpriteRenderer>();
+
+        // AudioSourceが存在しない場合に自動で追加
         audioSource = this.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         SetRandomAnimationSwitchTime();
     }
 
@@ -120,7 +129,7 @@ public class Enemy_1 : MonoBehaviour
             isAnimation2Playing = true;
             anime_time_2 = Time.time;
             anime_2_count = 0;
-            PlaySound(deathSound); // Play death sound
+            PlaySound(deathSound);
         }
     }
 
@@ -133,7 +142,7 @@ public class Enemy_1 : MonoBehaviour
             {
                 Vector2 forceDirection = movingRight ? forceDirectionRight : forceDirectionLeft;
                 rb.AddForce(forceDirection.normalized * thrust, ForceMode2D.Impulse);
-                PlaySound(deflectSound); // Play deflect sound
+                PlaySound(deflectSound);
             }
         }
     }
@@ -148,6 +157,8 @@ public class Enemy_1 : MonoBehaviour
             if (anime_1_count >= anim_1_array.Length) { anime_1_count = 0; }
 
             sr.sprite = anim_1_array[anime_1_count];
+
+            PlayLoopingSound();
         }
     }
 
@@ -162,7 +173,7 @@ public class Enemy_1 : MonoBehaviour
             {
                 anime_2_count = 0;
                 isAnimation2Playing = false;
-                DropItem(); // ドロップアイテムを生成
+                DropItem();
                 Destroy(gameObject);
             }
 
@@ -189,6 +200,9 @@ public class Enemy_1 : MonoBehaviour
         {
             int randomIndex = Random.Range(0, dropItems.Length);
             Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
+
+            // ドロップサウンドを再生
+            PlaySound(dropSound);
         }
     }
 
@@ -197,6 +211,24 @@ public class Enemy_1 : MonoBehaviour
         if (audioSource != null && clip != null)
         {
             audioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayLoopingSound()
+    {
+        if (!audioSource.isPlaying && animationLoopSound != null)
+        {
+            audioSource.loop = true;
+            audioSource.clip = animationLoopSound;
+            audioSource.Play();
+        }
+    }
+
+    private void StopLoopingSound()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 }

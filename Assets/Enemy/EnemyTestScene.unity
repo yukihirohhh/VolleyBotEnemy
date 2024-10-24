@@ -8689,7 +8689,7 @@ Transform:
   m_GameObject: {fileID: 3312035896385281995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.35, y: -0.19, z: 0}
+  m_LocalPosition: {x: 3.73, y: -1.18, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8743,6 +8743,7 @@ MonoBehaviour:
   dropItems:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
   deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
+  loopSound: {fileID: 8300000, guid: 756f68d03876ce643880bafcfe57e6a2, type: 3}
 --- !u!4 &1044041822040766149
 Transform:
   m_ObjectHideFlags: 0
@@ -8793,11 +8794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7429487876465345125, guid: ec5c59b1084f96c4dbdb2b2b9aa31cd4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.04
+      value: 3.06
       objectReference: {fileID: 0}
     - target: {fileID: 7429487876465345125, guid: ec5c59b1084f96c4dbdb2b2b9aa31cd4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 7429487876465345125, guid: ec5c59b1084f96c4dbdb2b2b9aa31cd4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9268,6 +9269,8 @@ MonoBehaviour:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
   deflectSound: {fileID: 8300000, guid: 89eaf8b51beefc6489b3456dbae03d76, type: 3}
   deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
+  dropSound: {fileID: 0}
+  animationLoopSound: {fileID: 8300000, guid: dc60311b56ce8554c8cfc529d373307e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
