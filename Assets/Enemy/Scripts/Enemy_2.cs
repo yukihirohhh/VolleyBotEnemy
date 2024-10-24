@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
 
     // Audio variables
     public AudioClip deathSound;
-    public AudioClip loopSound; // 新規追加: ループサウンドのAudioClip
+    public AudioClip flySound; // 新規追加: ループサウンドのAudioClip
     private AudioSource audioSource;
 
     void Start()
@@ -272,10 +272,10 @@ public class EnemyAI : MonoBehaviour
 
     private void PlayLoopingSound()
     {
-        if (!audioSource.isPlaying && loopSound != null)
+        if (!audioSource.isPlaying && flySound != null)
         {
             audioSource.loop = true;
-            audioSource.clip = loopSound;
+            audioSource.clip = flySound;
             audioSource.Play();
         }
     }

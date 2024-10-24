@@ -48,7 +48,7 @@ public class Enemy_1 : MonoBehaviour
     public AudioClip deflectSound;
     public AudioClip deathSound;
     public AudioClip dropSound;  // 新規追加: アイテムドロップ時のサウンド
-    public AudioClip animationLoopSound;
+    public AudioClip walkSound;
     private AudioSource audioSource;
 
     void Start()
@@ -216,10 +216,10 @@ public class Enemy_1 : MonoBehaviour
 
     private void PlayLoopingSound()
     {
-        if (!audioSource.isPlaying && animationLoopSound != null)
+        if (!audioSource.isPlaying && walkSound != null)
         {
             audioSource.loop = true;
-            audioSource.clip = animationLoopSound;
+            audioSource.clip = walkSound;
             audioSource.Play();
         }
     }

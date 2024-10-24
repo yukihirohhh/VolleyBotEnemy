@@ -8743,7 +8743,7 @@ MonoBehaviour:
   dropItems:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
   deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
-  loopSound: {fileID: 8300000, guid: 756f68d03876ce643880bafcfe57e6a2, type: 3}
+  flySound: {fileID: 0}
 --- !u!4 &1044041822040766149
 Transform:
   m_ObjectHideFlags: 0
@@ -9269,8 +9269,8 @@ MonoBehaviour:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
   deflectSound: {fileID: 8300000, guid: 89eaf8b51beefc6489b3456dbae03d76, type: 3}
   deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}
-  dropSound: {fileID: 0}
-  animationLoopSound: {fileID: 8300000, guid: dc60311b56ce8554c8cfc529d373307e, type: 3}
+  dropSound: {fileID: 8300000, guid: 52e7a73729848f4489c9cf04fb83acf4, type: 3}
+  walkSound: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
