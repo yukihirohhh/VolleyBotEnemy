@@ -8739,7 +8739,7 @@ MonoBehaviour:
   anim_3_sec: 0.15
   minAnimationSwitchInterval: 3
   maxAnimationSwitchInterval: 4
-  detectionRange: 2
+  detectionRange: 5
   dropItems:
   - {fileID: 823615053695692731, guid: 0a9b034db7932b1468c4fe78e89e5d08, type: 3}
   deathSound: {fileID: 8300000, guid: bfa3561fc354f7a43a6a2edb5230ba91, type: 3}

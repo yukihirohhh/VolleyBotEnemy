@@ -11,21 +11,18 @@ public class EnemyAI : MonoBehaviour
     public float speed;
     public float chaseSpeedMultiplier = 2f;
 
-    // Animation variables
     private SpriteRenderer sr;
     public Sprite[] anim_1_array;
     private float anime_time_1;
     public float anim_1_sec;
     private int anime_1_count;
 
-    // Death animation variables
     public Sprite[] anim_2_array;
     private float anime_time_2;
     public float anim_2_sec;
     private int anime_2_count;
     private bool isAnimation2Playing = false;
 
-    // Idle animation variables
     public Sprite[] anim_3_array;
     private float anime_time_3;
     public float anim_3_sec;
@@ -35,29 +32,24 @@ public class EnemyAI : MonoBehaviour
     public float minAnimationSwitchInterval = 3f;
     public float maxAnimationSwitchInterval = 6f;
 
-    // Player detection variables
     public float detectionRange = 5f;
     private Transform playerTransform;
     private bool isChasingPlayer = false;
 
-    // Drop item variables
     public GameObject[] dropItems;
 
-    // Audio variables
     public AudioClip deathSound;
-    public AudioClip flySound; // 新規追加: ループサウンドのAudioClip
+    public AudioClip flySound;
     private AudioSource audioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // Initialize animation variables
         sr = GetComponent<SpriteRenderer>();
         anime_time_1 = Time.time;
         anime_1_count = 0;
 
-        // Initialize points array based on relativePoints
         points = new Vector2[relativePoints.Length];
         for (int i = 0; i < relativePoints.Length; i++)
         {
