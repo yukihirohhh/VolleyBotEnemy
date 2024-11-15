@@ -7,6 +7,7 @@ public class Enemy_1 : MonoBehaviour
     private bool movingRight = true;
     private bool isAnimation2Playing = false;
     private bool isAnimation3Playing = false;
+    private bool isAnimation4Playing = false; // New variable for Animation 4
     SpriteRenderer sr;
 
     [Tooltip("動くスピード")] public float speed;
@@ -39,6 +40,12 @@ public class Enemy_1 : MonoBehaviour
     [Tooltip("フレームが変わる間隔設定")] public float anim_3_sec;
     [Tooltip("スプライトの変化プレビュー")] public int anime_3_count;
 
+    [Header("アニメーション用配列_4_Deflect ------------------------------------------------")]
+    [Tooltip("配列数")] public Sprite[] anim_4_array; // New array for Animation 4
+    float anime_time_4;
+    [Tooltip("フレームが変わる間隔設定")] public float anim_4_sec;
+    [Tooltip("スプライトの変化プレビュー")] public int anime_4_count;
+
     private float animationSwitchTime;
 
     // Drop item variables
@@ -70,6 +77,12 @@ public class Enemy_1 : MonoBehaviour
         if (isAnimation2Playing)
         {
             ANIMATION_2();
+            return;
+        }
+
+        if (isAnimation4Playing)
+        {
+            ANIMATION_4();
             return;
         }
 
@@ -137,15 +150,28 @@ public class Enemy_1 : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
-            Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector2 forceDirection = movingRight ? forceDirectionRight : forceDirectionLeft;
-                rb.AddForce(forceDirection.normalized * thrust, ForceMode2D.Impulse);
-                PlaySound(deflectSound);
-            }
+            StartCoroutine(DeflectBallAfterDelay(other));
         }
     }
+
+    private IEnumerator DeflectBallAfterDelay(Collider2D ball)
+    {
+        yield return new WaitForSeconds(0.08f); // 0.01秒遅らせる
+
+        Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 forceDirection = movingRight ? forceDirectionRight : forceDirectionLeft;
+            rb.AddForce(forceDirection.normalized * thrust, ForceMode2D.Impulse);
+            PlaySound(deflectSound);
+
+            // Trigger Animation 4
+            isAnimation4Playing = true;
+            anime_time_4 = Time.time;
+            anime_4_count = 0;
+        }
+    }
+
 
     void ANIMATION_1()
     {
@@ -191,6 +217,23 @@ public class Enemy_1 : MonoBehaviour
             if (anime_3_count >= anim_3_array.Length) { anime_3_count = 0; }
 
             sr.sprite = anim_3_array[anime_3_count];
+        }
+    }
+
+    void ANIMATION_4()
+    {
+        if (Time.time - anime_time_4 > anim_4_sec)
+        {
+            anime_time_4 = Time.time;
+
+            anime_4_count++;
+            if (anime_4_count >= anim_4_array.Length)
+            {
+                anime_4_count = 0;
+                isAnimation4Playing = false;
+            }
+
+            sr.sprite = anim_4_array[anime_4_count];
         }
     }
 

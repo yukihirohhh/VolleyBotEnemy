@@ -23,6 +23,7 @@ TagManager:
   - RailLeft
   - Ball
   - Enemy
+  - EnemyAmmo
   layers:
   - Default
   - TransparentFX

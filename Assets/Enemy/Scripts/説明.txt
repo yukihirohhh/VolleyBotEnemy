@@ -45,8 +45,32 @@ Detection Range :ƒvƒŒƒCƒ„[ƒ^ƒO‚ª•t‚¢‚½ƒIƒuƒWƒFƒNƒg‚ª‚±‚Ì”ÍˆÍ‚É“ü‚é‚Æ‚»‚ê‚ð’Ç‚¢‚
 Drop Items :Ž€‚ñ‚¾‚Æ‚«‚É—Ž‚¿‚éƒhƒƒbƒvƒAƒCƒeƒ€B‚¢‚­‚Â‚©’Ç‰Á‚Å‚«‚éB
 
 
+------------------------------------------------------------------------
+/////Enemy_3ƒXƒNƒŠƒvƒg//////////
+
+ƒAƒjƒ[ƒVƒ‡ƒ“‚Í‘¼‚Æˆê
+Min animation switch interval
+max ...........                     :“Š‚°‚é‚Ì‚Æ‘Ò‹@‚·‚éŽžŠÔ‚ÌŠ´Šo
+
+Drop item@:‚±‚ê‚àˆê
+
+Throw Item :“Š‚°‚éƒAƒCƒeƒ€‚ÌƒvƒŒƒnƒu‚Æ‚©‚ðƒAƒ^ƒbƒ`
+Throw distance :”ò‚Î‚·‹——£
+Throw Count : ˆê‰ñ‚É”ò‚Î‚·”
+Throw Height :”ò‚Î‚·‚Æ‚«‚Ìã‚É‚©‚¯‚é—Í
+Player :ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg‚ðƒAƒ^ƒbƒ`i‚±‚ê‚ð‚µ‚È‚¢‚ÆAƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚Ä‹Ê‚ð”ò‚Î‚³‚È‚¢
+
+
+
 -------------------------------------------------------------------------
 /////DropItemƒXƒNƒŠƒvƒg‚É‚Â‚¢‚Ä///////
 
 Drop Force :ƒhƒƒbƒv‚µ‚½uŠÔ‚É‚Ò‚å[‚ñ‚Á‚Ä‚È‚é
 Drop Sound :‰¹
+
+--------------------------------------------------------------------------
+
+/////ThrowItem‚·‚­‚è‚Õ‚Æ////////
+Destroy Delay :"Player" , "Ground"@ƒ^ƒO‚É“–‚½‚Á‚½‚çÁ‚¦‚é‚æ‚¤‚É‚È‚Á‚Ä‚éB“–‚½‚ÁŽè‚©‚çÁ‚¦‚é‚Ü‚Å‚ÌŽžŠÔBƒoƒO‚Á‚Ä‹@”\‚µ‚Ä‚È‚¢‚©‚àB
+Loop Anim Array :oŒ»‚µ‚Ä‚©‚çAÄ¶‚·‚éƒAƒjƒ[ƒVƒ‡ƒ“BiƒiƒCƒt‚Æ‚©‚­‚é‚­‚é‚·‚é‚â‚Â‚ð“ü‚ê‚é‚Æ‚»‚ê‚Á‚Û‚­Œ©‚¦‚é‚ÆŽv‚¤B
+Collisiton Anim Array :‰½‚©‚É“–‚½‚Á‚ÄÓ‚¯ŽU‚éƒAƒjƒ[ƒVƒ‡ƒ“
