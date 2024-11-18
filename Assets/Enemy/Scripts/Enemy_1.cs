@@ -55,7 +55,7 @@ public class Enemy_1 : MonoBehaviour
     public AudioClip deflectSound;
     public AudioClip deathSound;
     public AudioClip dropSound;  // 新規追加: アイテムドロップ時のサウンド
-    public AudioClip walkSound;
+    // public AudioClip walkSound; // Removed walk sound
     private AudioSource audioSource;
 
     void Start()
@@ -184,7 +184,7 @@ public class Enemy_1 : MonoBehaviour
 
             sr.sprite = anim_1_array[anime_1_count];
 
-            PlayLoopingSound();
+            // PlayLoopingSound(); // Removed walk sound
         }
     }
 
@@ -257,15 +257,15 @@ public class Enemy_1 : MonoBehaviour
         }
     }
 
-    private void PlayLoopingSound()
-    {
-        if (!audioSource.isPlaying && walkSound != null)
-        {
-            audioSource.loop = true;
-            audioSource.clip = walkSound;
-            audioSource.Play();
-        }
-    }
+    // private void PlayLoopingSound() // Removed walk sound
+    // {
+    //     if (!audioSource.isPlaying && walkSound != null)
+    //     {
+    //         audioSource.loop = true;
+    //         audioSource.clip = walkSound;
+    //         audioSource.Play();
+    //     }
+    // }
 
     private void StopLoopingSound()
     {

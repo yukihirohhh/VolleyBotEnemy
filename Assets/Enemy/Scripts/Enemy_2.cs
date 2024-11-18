@@ -39,7 +39,8 @@ public class EnemyAI : MonoBehaviour
     public GameObject[] dropItems;
 
     public AudioClip deathSound;
-    public AudioClip flySound;
+    public AudioClip dropSound; // Added drop sound
+    // public AudioClip flySound; // Removed fly sound
     private AudioSource audioSource;
 
     void Start()
@@ -206,7 +207,7 @@ public class EnemyAI : MonoBehaviour
             sr.sprite = anim_1_array[anime_1_count];
 
             // ループサウンドを再生
-            PlayLoopingSound();
+            // PlayLoopingSound(); // Removed fly sound
         }
     }
 
@@ -228,7 +229,7 @@ public class EnemyAI : MonoBehaviour
             sr.sprite = anim_2_array[anime_2_count];
 
             // ループサウンドを再生
-            PlayLoopingSound();
+            // PlayLoopingSound(); // Removed fly sound
         }
     }
 
@@ -251,6 +252,9 @@ public class EnemyAI : MonoBehaviour
         {
             int randomIndex = Random.Range(0, dropItems.Length);
             Instantiate(dropItems[randomIndex], transform.position, Quaternion.identity);
+
+            // Play drop sound
+            PlaySound(dropSound);
         }
     }
 
@@ -262,15 +266,15 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void PlayLoopingSound()
-    {
-        if (!audioSource.isPlaying && flySound != null)
-        {
-            audioSource.loop = true;
-            audioSource.clip = flySound;
-            audioSource.Play();
-        }
-    }
+    // private void PlayLoopingSound() // Removed fly sound
+    // {
+    //     if (!audioSource.isPlaying && flySound != null)
+    //     {
+    //         audioSource.loop = true;
+    //         audioSource.clip = flySound;
+    //         audioSource.Play();
+    //     }
+    // }
 
     private void StopLoopingSound()
     {
